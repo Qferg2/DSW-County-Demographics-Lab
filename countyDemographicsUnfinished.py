@@ -12,13 +12,21 @@ def main():
 
 def high_income_counties(counties):
     """Return a LIST of the counties with a median household income over $90,000."""
-    for data in demographics_data:
-        if key['Median Household Income'] > 90000:
-            print(data['County'])
+    list = []
+    for data in counties:
+        if data['Income']['Median Household Income'] > 90000:
+            list.append(data['County'])
+    print(list)
 
 def lowest_median_income(counties):
     """Return a name of a county with the lowest median household income"""
-    
+    min = counties[0]['Income']['Median Household Income']
+    county = counties[0]['County']
+    for data in counties:
+        if data['Income']['Median Household Income'] < min:
+            min = data['Income']['Median Household Income']
+            county = data['County']
+    print(county)
 
 def alphabetically_first_county(counties):
     """Return the county with the name that comes first alphabetically."""
@@ -26,11 +34,22 @@ def alphabetically_first_county(counties):
 
     
 def percent_most_under_18(counties):
-    """Return the highest percent of under 18 year olds."""    
+    """Return the highest percent of under 18 year olds."""
+    max = counties[0]['Age']['Percent Under 18 Years']
+    for data in counties:
+        if data['Age']['Percent Under 18 Years'] > max:
+            max = data['Age']['Percent Under 18 Years']
+    print(max)
     
-
 def county_most_under_18(counties):
     """Return the name a county with the highest percent of under 18 year olds."""
+    max = counties[0]['Age']['Percent Under 18 Years']
+    county = counties[0]['County']
+    for data in counties:
+        if data['Age']['Percent Under 18 Years'] > max:
+            max = data['Age']['Percent Under 18 Years']
+            county = data['County']
+    print(county)
     
 def state_with_most_counties(counties):
     """Return a state that has the most counties."""
