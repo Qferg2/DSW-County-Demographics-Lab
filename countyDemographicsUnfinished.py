@@ -31,6 +31,11 @@ def lowest_median_income(counties):
 def alphabetically_first_county(counties):
     """Return the county with the name that comes first alphabetically."""
     #Hint: you can use < to compare strings in Python. ex) "cat" < "dog" gives the value True
+    county = counties[0]['County']
+    for data in counties:
+        if data['County'] < county:
+            county = data['County']
+    return county
 
     
 def percent_most_under_18(counties):
@@ -55,11 +60,21 @@ def state_with_most_counties(counties):
     """Return a state that has the most counties."""
     #1. Make a dictionary that has a key for each state and the values keep track of the number of counties in each state
     
+    allStates = {}
+    for data in counties:
+        if data['State'] not in allStates:
+            allStates[data['State']] = 1
+        else:
+            allStates[data['State']] += 1
+    print(allStates)
+    
     #2. Find the state in the dictionary with the most counties
-    
+    for number in allStates:
+        if number > data['State']:
+            allStates['States'] = allStates[0]
+            
+            
     #3. Return the state with the most counties
-    
-    
 def your_interesting_demographic_function(counties):
     """Compute and return an interesting fact using the demographic data about the counties in the US."""
 
