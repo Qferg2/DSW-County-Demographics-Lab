@@ -9,6 +9,7 @@ def main():
     print(percent_most_under_18(counties))
     print(lowest_median_income(counties))
     print(state_with_most_counties(counties))
+    print(your_interesting_demographic_function(counties))
 
 def high_income_counties(counties):
     """Return a LIST of the counties with a median household income over $90,000."""
@@ -16,7 +17,7 @@ def high_income_counties(counties):
     for data in counties:
         if data['Income']['Median Household Income'] > 90000:
             list.append(data['County'])
-    print(list)
+    return list
 
 def lowest_median_income(counties):
     """Return a name of a county with the lowest median household income"""
@@ -26,7 +27,7 @@ def lowest_median_income(counties):
         if data['Income']['Median Household Income'] < min:
             min = data['Income']['Median Household Income']
             county = data['County']
-    print(county)
+    return county
 
 def alphabetically_first_county(counties):
     """Return the county with the name that comes first alphabetically."""
@@ -44,7 +45,7 @@ def percent_most_under_18(counties):
     for data in counties:
         if data['Age']['Percent Under 18 Years'] > max:
             max = data['Age']['Percent Under 18 Years']
-    print(max)
+    return max
     
 def county_most_under_18(counties):
     """Return the name a county with the highest percent of under 18 year olds."""
@@ -54,7 +55,7 @@ def county_most_under_18(counties):
         if data['Age']['Percent Under 18 Years'] > max:
             max = data['Age']['Percent Under 18 Years']
             county = data['County']
-    print(county)
+    return county
     
 def state_with_most_counties(counties):
     """Return a state that has the most counties."""
@@ -66,17 +67,27 @@ def state_with_most_counties(counties):
             allStates[data['State']] = 1
         else:
             allStates[data['State']] += 1
-    print(allStates)
     
     #2. Find the state in the dictionary with the most counties
-    for number in allStates:
-        if number > data['State']:
-            allStates['States'] = allStates[0]
-            
+    mostCounty = 'CA'
+    for state in allStates:
+        if allStates[state] > allStates[mostCounty]:
+            mostCounty = state
             
     #3. Return the state with the most counties
+    return mostCounty
+    
 def your_interesting_demographic_function(counties):
     """Compute and return an interesting fact using the demographic data about the counties in the US."""
+    """The county with the most veterans"""
+    
+    max = counties[0]['Miscellaneous']['Veterans']
+    county = counties[0]['County']
+    for data in counties:
+        if data['Miscellaneous']['Veterans'] > max:
+            max = data['Miscellaneous']['Veterans']
+            county = data['County']
+    return county
 
 if __name__ == '__main__':
     main()
